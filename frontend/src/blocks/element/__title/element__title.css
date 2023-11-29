@@ -1,0 +1,32 @@
+.element__title {
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000000;
+  padding: 0;
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 190px;
+}
+
+@media screen and (max-width:1024px) {
+  .element__title {
+    max-width: 100px;
+  }
+}
+
+@media screen and (max-width:768px) {
+  .element__title {
+    max-width: 148px;
+  }
+}
+
+@media screen and (max-width:550px) {
+  .element__title {
+    max-width: 170px;
+  }
+}

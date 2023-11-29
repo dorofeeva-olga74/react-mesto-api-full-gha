@@ -1,0 +1,5 @@
+.popup_button_active {
+    transition: visibility 0s, opacity 0.8s linear;
+    opacity: 1;
+    visibility: visible;
+}

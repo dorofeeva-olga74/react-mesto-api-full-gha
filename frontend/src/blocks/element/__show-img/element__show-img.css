@@ -1,0 +1,29 @@
+.element__show-img {
+    width: 100%;
+    height: calc(100% - 79px);
+    display: grid;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+    margin: 0;
+    padding: 0;
+}
+
+.element__show-img:active {
+    background-size: cover;
+}
+
+@media screen and (max-width:550px) {
+    .element__show-img {
+        max-width: 100%;
+        max-height: 100%;
+        min-height: 282px;
+    }
+}
+
+@media screen and (max-width:320px) {
+    .element__show-img {
+        min-height: 282px;
+    }
+}

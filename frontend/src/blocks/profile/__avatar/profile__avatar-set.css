@@ -1,0 +1,10 @@
+.profile__avatar-set {
+    background-image: url(../../../images/Vector.png);
+    background-color: #000;
+    border-radius: 100%;
+    height: 120px;
+    width: 120px;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    border: inherit;
+}

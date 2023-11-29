@@ -1,0 +1,16 @@
+.popup__title_place {
+    margin: 0;
+}
+
+@media screen and (max-width:465px) {
+    .popup__title_place {
+        margin: 0 117px 0 0;
+        padding: 0 0 48px 0;
+    }
+}
+
+@media screen and (max-width:320px) {
+    .popup__title_place {
+        margin-right: 115px;
+    }
+}

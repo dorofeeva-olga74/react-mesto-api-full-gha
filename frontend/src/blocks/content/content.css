@@ -1,0 +1,29 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-width: 880px;
+  padding: 0;
+  margin: 0 auto;
+}
+
+@media screen and (max-width:1024px) {
+  .content {
+    padding: 0 15.625vw;
+    width: calc(100% - 2*15.625vw);
+  }
+}
+
+@media screen and (max-width:768px) {
+  .content {
+    padding: 0 9.375vw;
+    width: calc(100% - 2*9.375vw);
+  }
+}
+
+@media screen and (max-width:550px) {
+  .content {
+    padding: 0 19px;
+    width: calc(100% - 2*19px);
+  }
+}

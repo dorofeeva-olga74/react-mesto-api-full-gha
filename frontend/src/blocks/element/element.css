@@ -1,0 +1,10 @@
+.element {
+  max-width: 100%;
+  max-height: 362px;
+  min-height: 361px;
+  height: 100%;
+  border-radius: 10px 10px 10px 10px;
+  overflow: hidden;
+  background: #FFFFFF;
+  position: relative;
+}

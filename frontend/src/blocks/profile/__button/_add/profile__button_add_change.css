@@ -1,0 +1,14 @@
+.profile__button_add_change {
+    width: 24px;
+    height: 24px;
+    padding: 7px;
+    background-image: url(./../../../../images/pen.svg);
+}
+
+@media screen and (max-width:410px) {
+    .profile__button_add_change {
+        width: 18px;
+        height: 18px;
+        padding: 5.25px;
+    }
+}

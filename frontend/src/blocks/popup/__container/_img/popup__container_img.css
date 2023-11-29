@@ -1,0 +1,6 @@
+.popup__container_img {
+    background-color: transparent;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+}

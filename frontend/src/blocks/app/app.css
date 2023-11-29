@@ -1,0 +1,23 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  text-decoration-color: #FFFFFF;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  background: #000000;
+  /*max-width: 1280px;*/
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 0;
+}
+
+@media screen and (max-width:320px) {
+  .app {
+    max-width: 320px;
+  }
+}

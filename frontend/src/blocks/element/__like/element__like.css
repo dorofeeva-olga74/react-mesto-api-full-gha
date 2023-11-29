@@ -1,0 +1,15 @@
+.element__like {
+    min-width: 22px;
+    min-height: 19px;
+    background: url("./../../../images/Serdce.svg");
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    margin: 0;
+    display: flex;
+}
+
+.element__like:hover {
+    opacity: 0.5;
+    transition: all linear 0.2s;
+}

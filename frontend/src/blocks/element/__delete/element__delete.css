@@ -1,0 +1,35 @@
+.element__delete {
+    left: 86.5%;
+    top: 6%;
+    position: absolute;
+    min-width: 18px;
+    min-height: 19.3px;
+    background: url("./../../../images/Urna.svg");
+    background-color: transparent;/*делает кнопку прозрачной*/
+    background-repeat: no-repeat;
+    color: #FFFFFF;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+    margin: 0;
+}
+
+.element__delete:hover {
+    opacity: 0.5;
+    transition: all linear 0.2s;
+    color: rgba(255, 255, 255, 0.6);
+}
+/*.element__delete_visible {
+    /*left: 86.5%;
+    top: 6%;
+    position: absolute;
+    min-width: 18px;
+    min-height: 19.3px;
+    background: url("./../../../images/Urna.svg");
+    cursor: pointer;
+    /*background-repeat: no-repeat;
+    color: #FFFFFF;
+    background-size: contain;
+    border: none;    
+    margin: 0;
+}*/

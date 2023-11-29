@@ -1,0 +1,31 @@
+.header {
+  max-width: 880px;
+  width: 100%;
+  max-height: 74px;
+  padding: 45px 0 0 0;
+  margin: 0 auto;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width:1024px) {
+  .header {
+    width: calc(100% - 2*15.625vw);
+  }
+}
+
+@media screen and (max-width:768px) {
+  .header {
+    width: calc(100% - 2*9.375vw);
+    max-height: 225px;
+  }
+}
+
+@media screen and (max-width:550px) {
+  .header {
+    padding: 0 27px 0 27px;
+    width: calc(100% - 27px*2);
+    flex-direction: column-reverse;
+  }
+}
