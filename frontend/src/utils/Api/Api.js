@@ -1,6 +1,7 @@
 export class Api {
   constructor({ url, headers }/*options*/) {//на входе некий обьект с url и headers
     this._url = url;// тело конструктора// или options.url 
+    //this._url = "https://api.jupiter.nomoredomainsmonster.ru"
     this._headers = headers;
   }
   //приватный метод ответа сервера
@@ -160,13 +161,14 @@ export class Api {
 }
 //для карточек
 const apiConfig = {///1
-  url: "http://localhost:3000",
+  url: "https://api.jupiter.nomoredomainsmonster.ru",
   headers: {
-    "Content-Type": "application/json",
+    //"Content-Type": "application/json",
     authorization: `Bearer ${localStorage.getItem('token')}`,
     // "authorization": "ae84b954-9fdb-4967-8466-ffa99a62c9a2",
   },
 };
+
 /*API*/
 const api = new Api(apiConfig);
 export default api;

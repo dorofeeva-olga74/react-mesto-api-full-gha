@@ -5,9 +5,9 @@ export default function Card(props) {
   const { name, link, likes, owner, openDeletePopup, setSelectedCardIdToDeleteData } = props;
   const currentUser = React.useContext(CurrentUserContext);
   // Определяем, являемся ли мы владельцем текущей карточки
-  const isOwn = owner[0]._id === currentUser._id;
+  const isOwn = owner === currentUser._id;
   // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
-  const isLiked = props.cardData.likes.some((i) => i._id === currentUser._id);
+  const isLiked = props.cardData.likes.some((id) => id === currentUser._id);
   // Создаём переменную, которую после зададим в `className` для кнопки лайка
   const cardLikeButtonClassName = `element__like ${isLiked ? "element__like_active" : "element__like"}`;
 

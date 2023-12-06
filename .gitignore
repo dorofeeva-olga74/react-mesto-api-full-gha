@@ -44,4 +44,3 @@ node_modules
 # Env
 .env
 node_modules
-public

@@ -87,7 +87,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsCardDeletePopupOpen(false);
-    setSelectedCard({})
+    setSelectedCard({});
     setIsInfoTooltipStatus(false);
     setIsInfoTooltipOpened(false);
   }
@@ -173,12 +173,38 @@ function App() {
     }
   }
   ///
+  // const getCurrentUserInfo = async () => {
+  //   try {
+  //     const currentUserInfo = await api.getProfileInfo();
+  //     setCurrentUser(currentUserInfo);
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
+  // const getCards = async () => {
+  //   try {
+  //     const apiCards = await api.getInitialCards();
+  //     //console.log(apiCards.data);
+  //     setCards(apiCards.data);
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
+  ///
   const navigate = useNavigate();
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate('/')
-    }
-  }, [isLoggedIn]);
+
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     navigate('/');
+  //   }
+  // }, [isLoggedIn]);  
+
+  // useEffect(() => {
+  //   if(isLoggedIn) {
+  //     getCurrentUserInfo();
+  //     getCards();
+  //   }
+  // }, [isLoggedIn])
 
   ////РЕГИСТРАЦИЯ ПОЛЬЗОВАТЕЛЯ - САБМИТ
   const handleRegisterSubmit = async (data) => {
@@ -186,13 +212,13 @@ function App() {
       await register(data);
       setIsInfoTooltipStatus(true);
       navigate("/sign-in");
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      //console.log(err);
       setIsInfoTooltipStatus(false);
     } finally {
       setIsInfoTooltipOpened(true);
     }
-  }
+  }  
   //АВТОРИЗАЦИЯ ПОЛЬЗОВАТЕЛЯ - САБМИТ
   const handleLoginSubmit = async (data) => {
     try {
@@ -219,7 +245,8 @@ function App() {
         })
         .catch((error) => console.log(error));
     }
-  }, [])
+  }, [navigate])  
+  
   //ВЫХОД
   const handleExitUser = () => {
     localStorage.removeItem('token');

@@ -1,8 +1,10 @@
 // Массив доменов, с которых разрешены кросс-доменные запросы
 const ALLOWED_CORS = [
-  'https://localhost:3001',
+  "https://jupiter.nomoredomainsmonster.ru",
+  "http://jupiter.nomoredomainsmonster.ru",
+  //"http://158.160.60.163",
+  //"https://158.160.60.163",
   'http://localhost:3001',
-  'https://localhost:3000',
   'http://localhost:3000',
 ];
 const DEFAULT_ALLOWED_METHODS = "GET,HEAD,PUT,PATCH,POST,DELETE";

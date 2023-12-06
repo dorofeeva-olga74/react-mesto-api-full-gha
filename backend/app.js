@@ -4,6 +4,7 @@ const express = require("express");//
 const dotenv = require("dotenv");
 dotenv.config();
 console.log(process.env.NODE_ENV); // production
+
 const cors = require("./middlewares/cors");
 
 const { requestLogger, errorLogger } = require("./middlewares/logger.js");
@@ -24,9 +25,7 @@ const NotFoundError = require("./errors/NotFoundError.js");
 const ERROR_INTERNAL_SERVER = 500;//вынесены магические числа
 
 // Слушаем 3000 порт
-const { PORT = 3000, MONGO_URL = "mongodb://127.0.0.1:27017/mestodb" } =
-  process.env;
-
+const { PORT = 3000, MONGO_URL = "mongodb://127.0.0.1:27017/mestodb" } = process.env;
 mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -60,6 +59,7 @@ app.use(express.json());
 // app.use(requestLogger);//???? нужен ли?
 //Логгер запросов нужно подключить до всех обработчиков роутов:
 app.use(cors);
+//app.use(cors({origin: ['http://localhost:3000']}));
 app.use(requestLogger); // подключаем логгер запросов
 
 app.use("/", router); // запускаем роутер

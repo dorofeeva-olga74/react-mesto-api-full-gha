@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000/";
+const BASE_URL = "https://api.jupiter.nomoredomainsmonster.ru";
 
 //приватный метод ответа сервера
 const getResponse = (res) => {
@@ -10,21 +10,21 @@ const getResponse = (res) => {
 }
 
 // Регистрация пользователя:
-export const register = async (data) => {//data /* здесь должны быть параметры */
-    const res = await fetch(`${BASE_URL}signup`, {
+export const register = async ({ password, email }) => {//data /* здесь должны быть параметры */
+    const res = await fetch(`${BASE_URL}/signup`, {
         method: "POST",
         headers: {
-            'Accept': 'application/json',
+            "Accept": "application/json",
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(data),//data /* отправляем данные на сервер */
+        body: JSON.stringify({ password, email }),//data /* отправляем данные на сервер */
     });
     //console.log(res)
     return getResponse(res);
 };
 //Авторизация пользователя:
 export const authorize = async (data) => {
-    const res = await fetch(`${BASE_URL}signin`, {
+    const res = await fetch(`${BASE_URL}/signin`, {    
         method: "POST",
         headers: {
             "Accept": "application/json",
@@ -36,12 +36,12 @@ export const authorize = async (data) => {
 };
 //Для проверки валидности токена и получения email:
 export const checkToken = async (token) => {
-    const res = await fetch(`${BASE_URL}users/me`, {
+    const res = await fetch(`${BASE_URL}/users/me`, {
         method: "GET",
         headers: {
-            "Accept": "application/json",
+            //"Accept": "application/json",
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
+            "Authorization": `Bearer ${token}`
         }
     });
     return getResponse(res);
