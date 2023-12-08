@@ -2,8 +2,6 @@
 const ALLOWED_CORS = [
   "https://jupiter.nomoredomainsmonster.ru",
   "http://jupiter.nomoredomainsmonster.ru",
-  "http://158.160.60.163",
-  "https://158.160.60.163",
   'http://localhost:3001',
   'http://localhost:3000',
 ];
