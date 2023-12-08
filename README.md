@@ -12,7 +12,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.60.163
+IP <158.160.60.163>
 
 Frontend https://jupiter.nomoredomainsmonster.ru
 
