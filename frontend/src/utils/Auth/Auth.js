@@ -1,4 +1,5 @@
-const BASE_URL = "https://api.jupiter.nomoredomainsmonster.ru";
+// const BASE_URL = "https://api.jupiter.nomoredomainsmonster.ru";
+const BASE_URL = "http://localhost:3000" || "https://api.jupiter.nomoredomainsmonster.ru";
 
 //приватный метод ответа сервера
 const getResponse = (res) => {
@@ -36,12 +37,13 @@ export const authorize = async (data) => {
 };
 //Для проверки валидности токена и получения email:
 export const checkToken = async (token) => {
+    //const token = localStorage.getItem("token");
     const res = await fetch(`${BASE_URL}/users/me`, {
         method: "GET",
         headers: {
-            //"Accept": "application/json",
+            "Accept": "application/json",
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     });
     return getResponse(res);

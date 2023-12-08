@@ -8,7 +8,7 @@ const NotFoundError = require("../errors/NotFoundError.js");
 
 module.exports.getCards = async (req, res) => {
   try {
-    const cards = await Card.find({}).populate(["owner", "likes"]);
+    const cards = await Card.find({})
     return res.send(cards);
   } catch (next) {
     return next(err);
@@ -17,11 +17,12 @@ module.exports.getCards = async (req, res) => {
 
 module.exports.createCard = async (req, res, next) => {
   const { name, link } = req.body;
-  //console.log(`name ${name}`)
+  // console.log(`name ${name}`)
   try {
-    const newCard = await Card({ name, link, owner: req.user._id });
-     // _id станет доступен
-    console.log(`newCard ${newCard}`)
+    const newCard = await Card.create({ name, link, owner: req.user._id });
+    // _id станет доступен
+    //console.log(`newCard ${newCard}`)
+    //console.log(`newCard: ${await newCard.save()}`)
     return res.status(httpConstants.HTTP_STATUS_CREATED).send(await newCard.save());
   } catch (err) {
     if (err instanceof mongoose.Error.ValidationError) {
@@ -40,10 +41,15 @@ module.exports.deleteCard = async (req, res, next) => {
       throw new NotFoundError("Карточка не найдена");
     })
     .then((card) => {
-      const owner = card.owner.toString();
+      const owner = card.owner._id + '';
+      //const owner = card.owner.toString();
+      // console.log(`req.user._id = ${req.user._id}`)
+      // console.log(`owner._id = ${owner}`)
+      // console.log(req.user._id === owner)
       if (req.user._id === owner) {
+        //console.log(`card = ${card}`)
         Card.deleteOne(card)
-          .then(() => {
+            .then(() => {
             return res.status(httpConstants.HTTP_STATUS_OK).send(card);
           })
           .catch(next);
@@ -66,7 +72,7 @@ module.exports.likeCard = async (req, res, next) => {
       { $addToSet: { likes: req.user._id } }, // добавить _id в массив, если его там нет
       { new: true },
     )
-      .populate(["likes", "owner"])
+      //.populate(["likes", "owner"])
       .orFail(() => {
         throw new NotFoundError("Карточка не найдена");
       })
@@ -87,7 +93,7 @@ module.exports.dislikeCard = async (req, res, next) => {
       { $pull: { likes: req.user._id } }, // убрать _id из массива
       { new: true },
     )
-    .populate(["likes", "owner"])
+    //.populate(["likes", "owner"])
     if (!dislike) {
       throw new NotFoundError("Карточка не найдена");
     }

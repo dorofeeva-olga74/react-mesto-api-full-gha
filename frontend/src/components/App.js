@@ -35,16 +35,7 @@ function App() {
   const [isInfoTooltipStatus, setIsInfoTooltipStatus] = useState(false);
   const [userEmail, setUserEmail] = useState("");
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      Promise.all([api.getProfileInfo(), api.getInitialCards()])
-        .then(([userInfoAnswer, cardsAnswer]) => {
-          setCurrentUser(userInfoAnswer);
-          setCards(cardsAnswer);
-        })
-        .catch((e) => console.error(e?.reason || e?.message));
-    }
-  }, [isLoggedIn]);
+
 
   // добавляю обработчики  
   const handleEditAvatarClick = () => {
@@ -122,7 +113,6 @@ function App() {
           name: name,
           about: about,
         }));
-
       })
       .catch((e) => console.error(e?.reason || e?.message))
       .finally(() => setIsLoadingUpdateUser(false))
@@ -131,20 +121,36 @@ function App() {
   function setSelectedCardIdToDeleteData(currentCardId) {
     setSelectedCardIdToDelete(currentCardId)
   }
-
-  function handleAddPlaceSubmit(data) {
-    setIsLoadingAddPlace(true)
-    api.createCardApi({
-      name: data.name,
-      link: data.link,
-    })
-      .then((newCard) => {
-        closeAllPopups();
-        setCards([newCard, ...cards]);
-      })
-      .catch((e) => console.error(e?.reason || e?.message))
-      .finally(() => setIsLoadingAddPlace(false))
-  }
+ //загузка карточек
+ const handleAddPlaceSubmit = async (data) => {
+  setIsLoadingAddPlace(true)
+  try {
+    const newCard = await api.createCardApi(data);
+    //console.log(await api.createCardApi(data))
+    console.log(newCard)
+    setCards([newCard, ...cards]);
+    closeAllPopups();
+    setIsLoadingAddPlace(false);
+  } catch (err) {
+    console.log(err)
+  } 
+}
+  // function handleAddPlaceSubmit(data) {
+  //   setIsLoadingAddPlace(true)
+  //   api.createCardApi({
+  //     name: data.name,
+  //     link: data.link,
+  //   })
+  //     .then((newCard) => {
+  //       closeAllPopups();
+  //       setCards(prev => ([
+  //         ...prev,
+  //         newCard
+  //       ]));
+  //     })
+  //     .catch((e) => console.error(e?.reason || e?.message))
+  //     .finally(() => setIsLoadingAddPlace(false))
+  // }
   // удаление
   function handleCardDelete() {
     setIsLoadingCardDelete(true)
@@ -157,7 +163,7 @@ function App() {
       .finally(() => setIsLoadingCardDelete(false))
   }
   function handleCardLike(card) {
-    const isLiked = card.cardData.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.cardData.likes.some((id) => id === currentUser._id);
     if (isLiked) {
       api.deleteLikeCardData(card.cardData._id)
         .then((newCard) => {
@@ -224,8 +230,8 @@ function App() {
     try {
       const { token } = await authorize(data);
       localStorage.setItem('token', token);
-      setIsLoggedIn(true);
       setUserEmail(data.email);
+      setIsLoggedIn(true);
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -243,9 +249,21 @@ function App() {
           setUserEmail(data.email);
           navigate("/");
         })
-        .catch((error) => console.log(error));
+        .catch((err) => console.log(err));
     }
   }, [navigate])  
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      Promise.all([api.getProfileInfo(), api.getInitialCards()])
+        .then(([userInfoAnswer, cardsAnswer]) => {
+          setCurrentUser(userInfoAnswer);
+          setCards(cardsAnswer.reverse());
+        })
+        .catch((e) => console.error(e?.reason || e?.message));
+    }
+  }, [isLoggedIn]);
   
   //ВЫХОД
   const handleExitUser = () => {

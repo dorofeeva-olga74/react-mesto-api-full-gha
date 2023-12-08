@@ -3,7 +3,7 @@ const express = require("express");//
 //Чтобы загрузить этот файл в Node.js, нужно установить в проект модуль dotenv
 const dotenv = require("dotenv");
 dotenv.config();
-console.log(process.env.NODE_ENV); // production
+// console.log(dotenv); // production
 
 const cors = require("./middlewares/cors");
 
@@ -26,6 +26,7 @@ const ERROR_INTERNAL_SERVER = 500;//вынесены магические чис
 
 // Слушаем 3000 порт
 const { PORT = 3000, MONGO_URL = "mongodb://127.0.0.1:27017/mestodb" } = process.env;
+
 mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -47,12 +48,12 @@ mongoose.connect(MONGO_URL, {
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // за 15 минут
-  max: 100 // можно совершить максимум 100 запросов с одного IP
+  max: 1000 // можно совершить максимум 100 запросов с одного IP
 });
 
 //мидлвэр
 // подключаем rate-limiter
-app.use(limiter);
+// app.use(limiter);
 app.use(helmet());
 app.use(express.json());
 

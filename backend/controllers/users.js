@@ -122,10 +122,10 @@ module.exports.login = async (req, res, next) => {
   try {
     const user = await User.findUserByCredentials(email, password)
     //console.log(`user: ${user}`)
-    const token = await jwt.sign({ _id: user._id }, "some-secret-key", { expiresIn: "7d" }); //exp (expiration time) — время жизни токена.
+    const token = await jwt.sign({ _id: user._id }, "some-secret-key", { expiresIn: "7d" }); //JWT_SECRET//exp (expiration time) — время жизни токена.
     //console.log(`token: ${token}`)
     // аутентификация успешна! пользователь в переменной user
-    return res.status(httpConstants.HTTP_STATUS_OK).send(({ token }));
+    return res.status(httpConstants.HTTP_STATUS_OK).send({ token });
   } catch (err) {
     //console.log(`err: ${err}`)
     next(err);

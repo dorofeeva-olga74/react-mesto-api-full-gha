@@ -4,13 +4,14 @@ const UnauthorizedError = require('../errors/UnauthorizedError.js');
 module.exports = async (req, res, next) => {
   // Верификация токена
   let payload;
+  const token = req.headers.authorization;
   try {
-    const token = req.headers.authorization;
-    console.log(`token: ${token}`)
+    //const token = req.headers.authorization;
+    // console.log(`token: ${token}`)
     if (!token) {
       throw new UnauthorizedError("Не правильные email или password");
     }
-    const validTocken = token.replace("Bearer ", "");
+    const validTocken = token.replace("Bearer ", "");//отрезать Bearer
     //console.log(`validTocken: ${validTocken}`)
     payload = await jwt.verify(validTocken, "some-secret-key");
     //console.log(`payload: ${payload}`)

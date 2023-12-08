@@ -18,13 +18,9 @@ const cardSchema = new mongoose.Schema({
     },
   },
   owner: {//ссылка на модель автора карточки
-    type: [
-      {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
-      }
-    ],
-    required: true,
+        required: true,
   },
 
 
