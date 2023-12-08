@@ -19,8 +19,7 @@ export const register = async ({ password, email }) => {//data /* здесь д�
             "Content-Type": "application/json"
         },
         body: JSON.stringify({ password, email }),//data /* отправляем данные на сервер */
-    });
-    //console.log(res)
+    });  
     return getResponse(res);
 };
 //Авторизация пользователя:

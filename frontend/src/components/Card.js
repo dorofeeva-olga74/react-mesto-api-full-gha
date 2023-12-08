@@ -6,9 +6,7 @@ export default function Card(props) {
   const currentUser = React.useContext(CurrentUserContext);
   // Определяем, являемся ли мы владельцем текущей карточки
   const isOwn = owner === currentUser._id;
-  // console.log(owner._id)
-  // console.log(currentUser._id)
-  // console.log(`isOwn = ${isOwn}`)
+  
   // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
   const isLiked = props.cardData.likes.some(id => id === currentUser._id);
   // Создаём переменную, которую после зададим в `className` для кнопки лайка

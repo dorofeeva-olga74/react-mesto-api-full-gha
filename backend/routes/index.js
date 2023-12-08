@@ -8,7 +8,7 @@ const auth = require("../middlewares/auth");
 
 const NotFoundError = require("../errors/NotFoundError.js");
 
-const pageNotAccess = (req, res, next) => {//401
+const pageNotAccess = (req, res, next) => {
   return next(new NotFoundError("Страница не найдена"));
 };
 

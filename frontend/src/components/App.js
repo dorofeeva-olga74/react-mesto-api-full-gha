@@ -35,8 +35,6 @@ function App() {
   const [isInfoTooltipStatus, setIsInfoTooltipStatus] = useState(false);
   const [userEmail, setUserEmail] = useState("");
 
-
-
   // добавляю обработчики  
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
@@ -135,22 +133,6 @@ function App() {
     console.log(err)
   } 
 }
-  // function handleAddPlaceSubmit(data) {
-  //   setIsLoadingAddPlace(true)
-  //   api.createCardApi({
-  //     name: data.name,
-  //     link: data.link,
-  //   })
-  //     .then((newCard) => {
-  //       closeAllPopups();
-  //       setCards(prev => ([
-  //         ...prev,
-  //         newCard
-  //       ]));
-  //     })
-  //     .catch((e) => console.error(e?.reason || e?.message))
-  //     .finally(() => setIsLoadingAddPlace(false))
-  // }
   // удаление
   function handleCardDelete() {
     setIsLoadingCardDelete(true)
@@ -178,39 +160,8 @@ function App() {
         .catch((e) => console.error(e?.reason || e?.message))
     }
   }
-  ///
-  // const getCurrentUserInfo = async () => {
-  //   try {
-  //     const currentUserInfo = await api.getProfileInfo();
-  //     setCurrentUser(currentUserInfo);
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
-  // const getCards = async () => {
-  //   try {
-  //     const apiCards = await api.getInitialCards();
-  //     //console.log(apiCards.data);
-  //     setCards(apiCards.data);
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
-  ///
-  const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     navigate('/');
-  //   }
-  // }, [isLoggedIn]);  
-
-  // useEffect(() => {
-  //   if(isLoggedIn) {
-  //     getCurrentUserInfo();
-  //     getCards();
-  //   }
-  // }, [isLoggedIn])
+  const navigate = useNavigate(); 
 
   ////РЕГИСТРАЦИЯ ПОЛЬЗОВАТЕЛЯ - САБМИТ
   const handleRegisterSubmit = async (data) => {
@@ -218,8 +169,7 @@ function App() {
       await register(data);
       setIsInfoTooltipStatus(true);
       navigate("/sign-in");
-    } catch (err) {
-      //console.log(err);
+    } catch (err) {  
       setIsInfoTooltipStatus(false);
     } finally {
       setIsInfoTooltipOpened(true);
@@ -283,8 +233,8 @@ function App() {
             <ProtectedRoute isLoggedIn={isLoggedIn}>
               <Main
                 cards={cards}
-                onEditProfile={handleEditProfileClick}/*новые пропсы*/
-                onAddPlace={handleAddPlaceClick}/*новые пропсы*/
+                onEditProfile={handleEditProfileClick}
+                onAddPlace={handleAddPlaceClick}
                 onEditAvatar={handleEditAvatarClick}
                 onCardClick={setSelectedCard}
                 onCardLike={handleCardLike}

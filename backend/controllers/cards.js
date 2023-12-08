@@ -20,9 +20,6 @@ module.exports.createCard = async (req, res, next) => {
   // console.log(`name ${name}`)
   try {
     const newCard = await Card.create({ name, link, owner: req.user._id });
-    // _id станет доступен
-    //console.log(`newCard ${newCard}`)
-    //console.log(`newCard: ${await newCard.save()}`)
     return res.status(httpConstants.HTTP_STATUS_CREATED).send(await newCard.save());
   } catch (err) {
     if (err instanceof mongoose.Error.ValidationError) {
@@ -43,11 +40,7 @@ module.exports.deleteCard = async (req, res, next) => {
     .then((card) => {
       const owner = card.owner._id + '';
       //const owner = card.owner.toString();
-      // console.log(`req.user._id = ${req.user._id}`)
-      // console.log(`owner._id = ${owner}`)
-      // console.log(req.user._id === owner)
       if (req.user._id === owner) {
-        //console.log(`card = ${card}`)
         Card.deleteOne(card)
             .then(() => {
             return res.status(httpConstants.HTTP_STATUS_OK).send(card);

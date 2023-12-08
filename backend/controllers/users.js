@@ -1,5 +1,5 @@
 const User = require("../models/User.js");
-const bcrypt = require("bcrypt"); // импортируем bcrypt
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const httpConstants = require("http2").constants;
 const mongoose = require("mongoose");
@@ -44,9 +44,7 @@ module.exports.createUser = async (req, res, next) => {
   try {
     const { name, about, avatar, email, password, } = req.body;
     const hash = await bcrypt.hash(password, SOLT_ROUNDS);
-    //console.log(`hash: ${hash}`)
     const newUser = await User.create({ name, about, avatar, email, password: hash });
-    //console.log(`newUser: ${newUser}`)
     return res.status(httpConstants.HTTP_STATUS_CREATED).send({
       name: newUser.name,
       about: newUser.about,
@@ -55,7 +53,6 @@ module.exports.createUser = async (req, res, next) => {
       email: newUser.email,
     });
   } catch (err) {
-    //console.log(err)
     if (err.code === ERROR_CODE_DUPLICATE_MONGO) {
       return next(new Conflict("Пользователь уже существует"));
     } else if (err instanceof mongoose.Error.ValidationError) {
@@ -69,13 +66,10 @@ module.exports.createUser = async (req, res, next) => {
 //Создайте контроллер и роут для получения информации о пользователе
 module.exports.getCurrentUser = async (req, res, next) => {
   try {
-    // console.log(`_id: ${_id}`)
-    // console.log(`req.user._id: ${req.user._id}`)
     const currentUser = await User.findById(req.user._id)
       .orFail(() => {
         throw new NotFoundError({ message: "Пользователь по id не найден" });
       });
-    //console.log(`currentUser: ${currentUser}`);
     return res.status(httpConstants.HTTP_STATUS_OK).send(currentUser);
   } catch (err) {
     return next(err);
@@ -105,7 +99,6 @@ module.exports.updateUser = async (req, res, next) => {
 module.exports.updateAvatar = async (req, res, next) => {
   try {
     const { avatar } = req.body;
-    //console.log(`avatar ${avatar}`)
     const updateAvatar = await User.findByIdAndUpdate(req.user._id, { avatar }, { new: "true", runValidators: "true" });
     return res.status(httpConstants.HTTP_STATUS_OK).send(updateAvatar);
   } catch (err) {
@@ -118,16 +111,12 @@ module.exports.updateAvatar = async (req, res, next) => {
 };
 module.exports.login = async (req, res, next) => {
   const { email, password } = req.body;
-  //console.log(`email: ${email}`)
   try {
     const user = await User.findUserByCredentials(email, password)
-    //console.log(`user: ${user}`)
     const token = await jwt.sign({ _id: user._id }, "some-secret-key", { expiresIn: "7d" }); //JWT_SECRET//exp (expiration time) — время жизни токена.
-    //console.log(`token: ${token}`)
     // аутентификация успешна! пользователь в переменной user
     return res.status(httpConstants.HTTP_STATUS_OK).send({ token });
   } catch (err) {
-    //console.log(`err: ${err}`)
     next(err);
   }
 };

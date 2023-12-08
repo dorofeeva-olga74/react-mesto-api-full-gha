@@ -16,8 +16,6 @@ usersRouter.get("/:userId", celebrate({
   }),
 }), getUserById);
 
-//usersRouter.post('/', createUser); - signupRouter
-
 usersRouter.patch("/me", celebrate({
   // валидируем тело запроса
   body: Joi.object().keys({
