@@ -5,6 +5,8 @@
   align-content: center;
   justify-content: center;
   align-items: center;
+  width: 100vw;
+  height: 100vh;
   text-decoration-color: #FFFFFF;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
