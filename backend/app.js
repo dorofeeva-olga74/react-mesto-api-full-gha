@@ -40,12 +40,10 @@ mongoose.connect(MONGO_URL, {
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // за 15 минут
-  max: 100 // можно совершить максимум 100 запросов с одного IP
+  max: 1000 // можно совершить максимум 100 запросов с одного IP
 });
 
 //мидлвэр
-// подключаем rate-limiter
-app.use(limiter);
 app.use(helmet());
 app.use(express.json());
 
@@ -53,15 +51,23 @@ app.use(express.json());
 app.use(cors);
 //app.use(cors({origin: ['http://localhost:3000']}));
 app.use(requestLogger); // подключаем логгер запросов
+// подключаем rate-limiter
+app.use(limiter);
+
+// КРАШ-ТЕСТ сервера
+app.get("/crash-test", () => {
+  setTimeout(() => {
+    throw new Error("Сервер сейчас упадёт");
+  }, 0);
+});
 
 app.use("/", router); // запускаем роутер
 
+// errors
 app.use(errorLogger); // подключаем логгер ошибок
-
 app.use(function (req, res, next) {
   return next(new NotFoundError("Переданы некорректные данные или такого маршрута несуществует"));
 });
-
 app.use(errors());// обработчик ошибок celebrate
 
 // здесь обрабатываем все ошибки

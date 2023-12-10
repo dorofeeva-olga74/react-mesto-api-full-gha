@@ -10,6 +10,7 @@ const Conflict = require("../errors/Conflict.js");
 
 const ERROR_CODE_DUPLICATE_MONGO = 11000;//вынесены магические числа
 const SOLT_ROUNDS = 10;// хешируем пароль
+const {JWT_SECRET = "some-secret-key"} = process.env;
 
 module.exports.getUsers = async (req, res, next) => {
   try {
@@ -113,7 +114,7 @@ module.exports.login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const user = await User.findUserByCredentials(email, password)
-    const token = await jwt.sign({ _id: user._id }, "some-secret-key", { expiresIn: "7d" }); //JWT_SECRET//exp (expiration time) — время жизни токена.
+    const token = await jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: "7d" }); //"some-secret-key", JWT_SECRET//exp (expiration time) — время жизни токена.
     // аутентификация успешна! пользователь в переменной user
     return res.status(httpConstants.HTTP_STATUS_OK).send({ token });
   } catch (err) {

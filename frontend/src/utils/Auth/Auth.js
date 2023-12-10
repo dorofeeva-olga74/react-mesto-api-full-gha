@@ -1,5 +1,5 @@
- const BASE_URL = "https://api.jupiter.nomoredomainsmonster.ru";
-//const BASE_URL = "http://localhost:3000" || "https://api.jupiter.nomoredomainsmonster.ru";
+//const BASE_URL = "https://api.jupiter.nomoredomainsmonster.ru";
+const BASE_URL = "http://localhost:3000" || "https://api.jupiter.nomoredomainsmonster.ru";
 
 //приватный метод ответа сервера
 const getResponse = (res) => {
