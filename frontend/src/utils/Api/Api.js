@@ -16,7 +16,7 @@ export class Api {
   }
   
   //инициировать карточки //получение данных с сервера
-  getInitialCards(url) {//getAllToddos
+  getInitialCards(url) { //getAllToddos
     return this._request(`${this._url}/cards`, { headers: {authorization: `Bearer ${localStorage.getItem('token')}`,
     'Content-Type': 'application/json' }})
   }
