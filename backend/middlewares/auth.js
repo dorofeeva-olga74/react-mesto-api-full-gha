@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = process.env;
+require("dotenv").config();
+const { NODE_ENV, JWT_SECRET } = process.env;
 const UnauthorizedError = require('../errors/UnauthorizedError.js');
 
 module.exports = async (req, res, next) => {
@@ -12,7 +13,7 @@ module.exports = async (req, res, next) => {
     }
     const validTocken = token.replace("Bearer ", "");//отрезать Bearer
     //console.log(`validTocken: ${validTocken}`)
-    payload = await jwt.verify(validTocken, process.env.NODE_ENV === 'production'? JWT_SECRET : "dev-secret");
+    payload = await jwt.verify(validTocken, NODE_ENV === 'production'? JWT_SECRET : "dev-secret");
   } catch (err) {
     if (err.message === "NotAutanticate") {
       return next(new UnauthorizedError("Необходима авторизация"));//401

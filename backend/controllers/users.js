@@ -1,6 +1,8 @@
+require("dotenv").config();
 const User = require("../models/User.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+
 const httpConstants = require("http2").constants;
 const mongoose = require("mongoose");
 
@@ -10,7 +12,7 @@ const Conflict = require("../errors/Conflict.js");
 
 const ERROR_CODE_DUPLICATE_MONGO = 11000;//вынесены магические числа
 const SOLT_ROUNDS = 10;// хешируем пароль
-const { JWT_SECRET } = process.env;
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports.getUsers = async (req, res, next) => {
   try {
@@ -114,9 +116,7 @@ module.exports.login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const user = await User.findUserByCredentials(email, password)
-    const token = await jwt.sign({ _id: user._id },
-      process.env.NODE_ENV === 'production'? JWT_SECRET : "dev-secret",
-      { expiresIn: "7d" }); //exp (expiration time) — время жизни токена.
+    const token = await jwt.sign({ _id: user._id }, NODE_ENV === 'production'? JWT_SECRET : "dev-secret", { expiresIn: "7d" }); //exp (expiration time) — время жизни токена.
     // аутентификация успешна! пользователь в переменной user
     return res.status(httpConstants.HTTP_STATUS_OK).send({ token });
   } catch (err) {

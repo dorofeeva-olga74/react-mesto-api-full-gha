@@ -3,7 +3,8 @@ const express = require("express");//
 //Чтобы загрузить этот файл в Node.js, нужно установить в проект модуль dotenv
 const dotenv = require("dotenv");
 dotenv.config();
-console.log(dotenv); // production
+const { NODE_ENV, PORT, MONGO_URL } = process.env;
+console.log(NODE_ENV); // production
 
 const cors = require("./middlewares/cors");
 
@@ -25,7 +26,6 @@ const NotFoundError = require("./errors/NotFoundError.js");
 const ERROR_INTERNAL_SERVER = 500;//вынесены магические числа
 
 // Слушаем 3000 порт
-const { PORT, MONGO_URL } = process.env;
 mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
