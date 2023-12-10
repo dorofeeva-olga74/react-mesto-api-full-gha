@@ -86,8 +86,8 @@ export class Api {
 }
 //для карточек
 const apiConfig = {
-  //url: "https://api.jupiter.nomoredomainsmonster.ru",
-  url: "http://localhost:3000",
+  url: "https://api.jupiter.nomoredomainsmonster.ru",
+  //url: "http://localhost:3000",
   headers: {
     "Content-Type": "application/json",
      authorization: `Bearer ${localStorage.getItem('token')}`,
