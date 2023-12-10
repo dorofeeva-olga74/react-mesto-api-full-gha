@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const {JWT_SECRET = "some-secret-key"} = process.env;
+const {JWT_SECRET = "7472c8114dce9424984b33f9ba38c58b4ad3ab8e"} = process.env;
 const UnauthorizedError = require('../errors/UnauthorizedError.js');
 
 module.exports = async (req, res, next) => {
@@ -12,7 +12,7 @@ module.exports = async (req, res, next) => {
     }
     const validTocken = token.replace("Bearer ", "");//отрезать Bearer
     //console.log(`validTocken: ${validTocken}`)
-    payload = await jwt.verify(validTocken, JWT_SECRET);
+    payload = await jwt.verify(validTocken, process.env.NODE_ENV === 'production'? JWT_SECRET : "dev-secret");
     //console.log(`payload: ${payload}`)
   } catch (err) {
     if (err.message === "NotAutanticate") {
