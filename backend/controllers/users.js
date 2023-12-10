@@ -10,7 +10,8 @@ const Conflict = require("../errors/Conflict.js");
 
 const ERROR_CODE_DUPLICATE_MONGO = 11000;//вынесены магические числа
 const SOLT_ROUNDS = 10;// хешируем пароль
-const {JWT_SECRET = "7472c8114dce9424984b33f9ba38c58b4ad3ab8e"} = process.env;
+//const {JWT_SECRET = "7472c8114dce9424984b33f9ba38c58b4ad3ab8e"} = process.env;
+const { JWT_SECRET } = process.env;
 
 module.exports.getUsers = async (req, res, next) => {
   try {
