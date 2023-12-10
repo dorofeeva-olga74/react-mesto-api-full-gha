@@ -26,7 +26,7 @@ const NotFoundError = require("./errors/NotFoundError.js");
 const ERROR_INTERNAL_SERVER = 500;//вынесены магические числа
 
 // Слушаем 3000 порт
-mongoose.connect(MONGO_URL, {
+mongoose.connect(MONGO_URL || "mongodb://127.0.0.1:27017/mestodb", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   family: 4,
