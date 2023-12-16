@@ -54,11 +54,11 @@ app.use(requestLogger); // подключаем логгер запросов
 app.use(limiter);
 
 // КРАШ-ТЕСТ сервера
-app.get("/crash-test", () => {
-  setTimeout(() => {
-    throw new Error("Сервер сейчас упадёт");
-  }, 0);
-});
+// app.get("/crash-test", () => {
+//   setTimeout(() => {
+//     throw new Error("Сервер сейчас упадёт");
+//   }, 0);
+// });
 
 app.use("/", router); // запускаем роутер
 

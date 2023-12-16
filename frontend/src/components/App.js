@@ -125,7 +125,7 @@ function App() {
   try {
     const newCard = await api.createCardApi(data);
     //console.log(await api.createCardApi(data))
-    console.log(newCard)
+    //console.log(newCard)
     setCards([newCard, ...cards]);
     closeAllPopups();
     setIsLoadingAddPlace(false);

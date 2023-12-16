@@ -1,4 +1,5 @@
 .element__like_active {
     background: url("./../../../../images/Black-serdce.svg");
+    background-repeat: no-repeat;
     opacity: 1;
 }

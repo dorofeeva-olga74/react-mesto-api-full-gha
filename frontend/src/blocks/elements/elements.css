@@ -23,5 +23,6 @@
    .elements {
       grid-template-columns: 1fr;
       grid-template-rows: repeat(6, 1fr);
+      max-width: 282px;
    }
 }
