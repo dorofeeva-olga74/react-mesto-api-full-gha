@@ -7,9 +7,7 @@ const { NODE_ENV, PORT, MONGO_URL } = process.env;
 console.log(NODE_ENV); // production
 
 const cors = require("./middlewares/cors");
-
 const { requestLogger, errorLogger } = require("./middlewares/logger.js");
-
 const mongoose = require("mongoose");
 
 //'helmet' Заголовки безопасности можно проставлять автоматически// npm i

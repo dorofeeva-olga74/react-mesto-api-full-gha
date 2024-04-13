@@ -119,7 +119,7 @@ function App() {
   function setSelectedCardIdToDeleteData(currentCardId) {
     setSelectedCardIdToDelete(currentCardId)
   }
- //загузка карточек
+ //загузка карточки созданной вместе с остальными
  const handleAddPlaceSubmit = async (data) => {
   setIsLoadingAddPlace(true)
   try {
